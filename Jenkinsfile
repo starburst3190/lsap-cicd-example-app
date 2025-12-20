@@ -38,7 +38,7 @@ pipeline {
 
                     sh "docker rm -f dev-app || true"
 
-                    sh "docker run -d --name dev-app -p 8081:8080 ${fullImage}"
+                    sh "docker run -d --name dev-app -p 8081:3000 ${fullImage}"
                     
                     sh "sleep 5 && curl -f http://localhost:8081/health || echo 'Health check failed, continuing...'"
                 }
@@ -71,7 +71,7 @@ pipeline {
 
                     sh "docker rm -f prod-app || true"
 
-                    sh "docker run -d --name prod-app -p 8082:8080 ${prodImage}"
+                    sh "docker run -d --name prod-app -p 8082:3000 ${prodImage}"
                 }
             }
         }
