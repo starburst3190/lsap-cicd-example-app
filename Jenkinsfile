@@ -40,7 +40,10 @@ pipeline {
 
                     sh "docker run -d --name dev-app -p 8081:3000 ${fullImage}"
                     
-                    sh "sleep 5 && curl -f http://localhost:8081/health || echo 'Health check failed, continuing...'"
+                    def appIP = sh(script: "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dev-app", returnStdout: true).trim()
+                    
+                    echo "Checking health at ${appIP}:3000..."
+                    sh "sleep 5 && curl -f http://${appIP}:3000/health"
                 }
             }
         }
