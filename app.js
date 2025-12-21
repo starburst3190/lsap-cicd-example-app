@@ -5,7 +5,7 @@ const app = express();
 app.get("/", (req, res) => {
   res
     .status(200)
-    .send("<h1>Welcome to phase 1 demo ver 2!</h1>");
+    .send("<h1>Welcome to phase 1 demo ver 3!</h1>");
 });
 
 app.get('/health', (req, res) => {
